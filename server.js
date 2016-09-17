@@ -1,9 +1,16 @@
 var http = require('http');
+var instanceId = guid();
+
 var handleRequest = function(request, response) {
   console.log('Received request for URL: ' + request.url);
   response.writeHead(200);
-  response.end('Hello World!');
+  response.end(JSON.stringify({
+    msg: 'Hello World!',
+    instance: instanceId,
+    request: guid()
+  }));
 };
+
 var www = http.createServer(handleRequest);
 www.listen(3000);
 
